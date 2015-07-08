@@ -34,9 +34,8 @@ namespace WTTools
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
-
             GC.SuppressFinalize(this);
+            this.Dispose(true);            
         }
 
         /// <summary>
