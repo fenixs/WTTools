@@ -108,7 +108,8 @@ namespace WTTools.Security
         {
             DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
             byte[] bytes = Encoding.Default.GetBytes(input);
-            var bytestemp = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile(skey, "md5").Substring(0, 8));
+            //var bytestemp = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile(skey, "md5").Substring(0, 8));
+            var bytestemp = Encoding.ASCII.GetBytes(MD5Encrypt.MD5(skey,8));
             provider.Key = bytestemp;
             provider.IV = bytestemp;
             StringBuilder sb = new StringBuilder();
@@ -154,7 +155,8 @@ namespace WTTools.Security
                 int tmp = Convert.ToInt32(input.Substring(i * 2, 2), 0x10);
                 buffer[i] = (byte)tmp;
             }
-            var bytestemp = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").Substring(0, 8));
+            //var bytestemp = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").Substring(0, 8));
+            var bytestemp = Encoding.ASCII.GetBytes(MD5Encrypt.MD5(key,8));
             provider.IV = bytestemp;
             provider.Key = bytestemp;
             using(MemoryStream stream = new MemoryStream())
