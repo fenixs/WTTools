@@ -16,45 +16,15 @@ namespace WTTools.Security
         /// <summary>
         /// 加密的Key
         /// </summary>
-        private string _Key = "WT_Tools";
+        private static string _Key = "WT_Tools";
 
-        /// <summary>
-        /// 加密的key
-        /// </summary>
-        public string Key
-        {
-            get
-            {
-                return _Key;
-            }
-            set
-            {
-                _Key = value;
-            }
-        }
+
 
         #endregion
 
-        #region "构造 析构"
-        private DesEncrypt()
-        {
 
-        }
+        #region "Encrypt"        
 
-        ~DesEncrypt()
-        {
-            this.Dispose();
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-        #endregion
-
-        #region "Encrypt"
-        
-        
         /// <summary>
         /// 加密
         /// </summary>
@@ -62,7 +32,7 @@ namespace WTTools.Security
         /// <param name="key"></param>
         /// <param name="iv"></param>
         /// <returns></returns>
-        public string Encrypt(string input,out string key,out string iv)
+        public static string Encrypt(string input,out string key,out string iv)
         {
             key = "";
             iv = "";
@@ -87,24 +57,24 @@ namespace WTTools.Security
             return sb.ToString();
         }
 
-        public byte[] MakeMD5(byte[] original)
+        public static byte[] MakeMD5(byte[] original)
         {
             byte[] buffer = new MD5CryptoServiceProvider().ComputeHash(original);
             return buffer;
         }
 
-        public byte[] Encrypt(byte[] original,byte[] key)
+        public static byte[] Encrypt(byte[] original,byte[] key)
         {
             TripleDESCryptoServiceProvider provider = new TripleDESCryptoServiceProvider
             {
-                Key = this.MakeMD5(key),
+                Key = MakeMD5(key),
                 Mode = CipherMode.ECB
             };
 
             return provider.CreateEncryptor().TransformFinalBlock(original,0,original.Length);
         }
 
-        public string Encrypt(string input,string skey)
+        public static string Encrypt(string input,string skey)
         {
             DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
             byte[] bytes = Encoding.Default.GetBytes(input);
@@ -131,21 +101,21 @@ namespace WTTools.Security
 
         }
 
-        public string Encrypt(string input)
+        public static string Encrypt(string input)
         {
-            return Encrypt(input, this._Key);
+            return Encrypt(input, _Key);
         }
 
         #endregion
 
         #region "Decrypt"
 
-        public string Decrypt(string input)
+        public static string Decrypt(string input)
         {
-            return Decrypt(input, this._Key);
+            return Decrypt(input, _Key);
         }
 
-        public string Decrypt(string input,string key)
+        public static string Decrypt(string input,string key)
         {
             DESCryptoServiceProvider provider = new DESCryptoServiceProvider();
             int num = input.Length / 2;
@@ -170,7 +140,7 @@ namespace WTTools.Security
             }
         }
 
-        public string Decrypt(string input,string iv,string key)
+        public static string Decrypt(string input,string iv,string key)
         {
             byte[] byteskey = new UnicodeEncoding().GetBytes(key);
             byte[] bytesiv = new UnicodeEncoding().GetBytes(iv);
