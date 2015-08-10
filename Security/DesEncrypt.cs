@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace WTTools.Security
 {
-    class DesEncrypt
+    public class DesEncrypt
     {
 
         #region "fields"

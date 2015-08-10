@@ -9,7 +9,7 @@ using System.IO;
 
 namespace WTTools.Security
 {
-    class AESEncrypt
+    public class AESEncrypt
     {
         #region "Fields"
         /// <summary>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Security;
 namespace WTTools.Security
 {
-    class MD5Encrypt
+    public class MD5Encrypt
     {
         public static byte[] MD5(byte[] data)
         {
