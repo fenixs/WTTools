@@ -51,6 +51,7 @@
     <Compile Include="DisposableBaseInfo.cs" />
     <Compile Include="IOHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AESEncrypt.cs" />
     <Compile Include="Security\DesEncrypt.cs" />
     <Compile Include="Security\MD5Encrypt.cs" />
   </ItemGroup>
